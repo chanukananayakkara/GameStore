@@ -27,7 +27,10 @@ List<GameDto> games = [
     )
 ];
 
+//GET /games
 app.MapGet("games", () => games);
+
+//initial sample request
 app.MapGet("/", () => "Hello World!");
 
 app.Run();
