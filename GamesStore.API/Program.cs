@@ -51,7 +51,7 @@ app.MapPost("games", (CreateGameDto newGame) =>
     return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game);
 });
 
-//PUT /games
+//PUT /games/1
 app.MapPut("games/{id}", (int id, UpdateGameDto UpdatedGame) =>
 {
     var index = games.FindIndex(game => game.Id == id);
@@ -66,6 +66,15 @@ app.MapPut("games/{id}", (int id, UpdateGameDto UpdatedGame) =>
     return Results.NoContent();
 
 });
+
+//DELETE /games/1
+app.MapDelete("games/{id}", (int id) =>
+{
+    games.RemoveAll(game => game.Id == id);
+
+    return Results.NoContent();
+});
+
 
 //initial sample request
 app.MapGet("/", () => "Hello World!");
