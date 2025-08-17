@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
     "name": "Minecraft",
-    "genere": "Kids and Family",
+    "genre": "Kids and Family",
     "price": 19.99,
     "releaseDate": "2011-11-18"
 }
