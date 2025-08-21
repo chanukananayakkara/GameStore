@@ -13,6 +13,8 @@ var app = builder.Build();
 
 app.MapGamesEndpoints();
 
+app.MigrateDb();
+
 //initial sample request
 app.MapGet("/", () => "Hello World!");
 
