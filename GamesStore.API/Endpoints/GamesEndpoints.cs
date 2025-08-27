@@ -65,22 +65,18 @@ public static class GamesEndpoints
         
 
         //PUT /games/1
-        group.MapPut("/{id}", (int id, UpdateGameDto UpdatedGame) =>
+        group.MapPut("/{id}", (int id, UpdateGameDto UpdatedGame, GameStoreContext dbContext) =>
         {
-            var index = games.FindIndex(game => game.Id == id);
+            var existingGame = dbContext.Games.Find(id);
 
-            if (index == -1)
+            if (existingGame is null)
             {
                 return Results.NotFound();
             }
-            
-            games[index] = new GameSummaryDto(
-                id,
-                UpdatedGame.Name,
-                UpdatedGame.Genre,
-                UpdatedGame.Price,
-                UpdatedGame.ReleaseDate
-            );
+
+            dbContext.Entry(existingGame).CurrentValues.SetValues(UpdatedGame.ToEntity(id));
+
+            dbContext.SaveChanges();
 
             return Results.NoContent();
 
