@@ -38,8 +38,10 @@ public static class GamesEndpoints
     {
         var group = app.MapGroup("games")
             .WithParameterValidation();
+
             //GET /games
         group.MapGet("/", () => games);
+        
 
         //GET /games/1
         group.MapGet("/{id}", (int id, GameStoreContext dbContext) =>
