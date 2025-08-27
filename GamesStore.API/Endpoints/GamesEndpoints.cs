@@ -3,6 +3,7 @@ using GamesStore.API.Data;
 using GamesStore.API.Dtos;
 using GamesStore.API.Entities;
 using GamesStore.API.Mapping;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamesStore.API.Endpoints;
 
@@ -40,7 +41,10 @@ public static class GamesEndpoints
             .WithParameterValidation();
 
             //GET /games
-        group.MapGet("/", () => games);
+        group.MapGet("/", (GameStoreContext dbContext) =>
+                                    dbContext.Games
+                                                .Include(game => game.Genre)
+                                                .Select(game => game.ToGameSummaryDto()));
         
 
         //GET /games/1
