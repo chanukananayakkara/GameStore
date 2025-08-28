@@ -44,7 +44,8 @@ public static class GamesEndpoints
         group.MapGet("/", (GameStoreContext dbContext) =>
                                     dbContext.Games
                                                 .Include(game => game.Genre)
-                                                .Select(game => game.ToGameSummaryDto()));
+                                                .Select(game => game.ToGameSummaryDto())
+                                                .AsNoTracking());
         
 
         //GET /games/1
