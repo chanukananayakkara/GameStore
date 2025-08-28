@@ -11,30 +11,6 @@ public static class GamesEndpoints
 {
     const String GetGameEndpointName = "GetGame";
 
-    private static readonly List<GameSummaryDto> games = [
-        new(
-        1,
-        "Street Fiter II",
-        "Fighting",
-        19.99M,
-        new DateOnly(1992,07,15)
-    ),
-    new(
-        2,
-        "Final Fantacy XIV",
-        "Roleplaying",
-        59.99M,
-        new DateOnly(2010,09,30)
-    ),
-    new(
-        3,
-        "FIFA 23",
-        "Sports",
-        69.99M,
-        new DateOnly(2022,09,27)
-    )
-    ];
-
     public static RouteGroupBuilder MapGamesEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("games")
