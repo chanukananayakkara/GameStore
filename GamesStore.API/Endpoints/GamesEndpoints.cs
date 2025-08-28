@@ -17,11 +17,12 @@ public static class GamesEndpoints
             .WithParameterValidation();
 
         //GET /games
-        group.MapGet("/", (GameStoreContext dbContext) =>
-                                    dbContext.Games
+        group.MapGet("/", async (GameStoreContext dbContext) =>
+                                   await dbContext.Games
                                                 .Include(game => game.Genre)
                                                 .Select(game => game.ToGameSummaryDto())
-                                                .AsNoTracking());
+                                                .AsNoTracking()
+                                                .ToListAsync());
 
         
 
